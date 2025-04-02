@@ -1,43 +1,42 @@
-import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import {Box,
-    AppBar, 
-    Button,
-    Toolbar,
-    IconButton,
-    Typography,
-    Menu,
-    Container,
-    Avatar,
-    Tooltip,
-    MenuItem,
-    InputBase,
-    Badge
-} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert';
-import {useLocation,
-    useRouter,
-    Link
-} from 'wouter'
+import * as React from "react";
+import { styled, alpha } from "@mui/material/styles";
+import {
+  Box,
+  AppBar,
+  Button,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Avatar,
+  Tooltip,
+  MenuItem,
+  InputBase,
+  Badge,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import MoreIcon from "@mui/icons-material/MoreVert";
+import { useLocation, useRouter, Link } from "wouter";
+import { API_URL } from "./AppInclude.jsx";
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
+  "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
-    width: 'auto',
+    width: "auto",
   },
 }));
 
@@ -67,65 +66,75 @@ export default function AppBarComponent() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const handleMenuItemClick = (setting) =>{
+  const handleMenuItemClick = (setting) => {
     handleMenuClose();
-    switch(setting) {
-        case 'Profile':
-            setLocation('/Profile');
-            break;
-        case 'CreateListings':
-            setLocation('/CreateListings');
-            break;
-        case 'Logout':
-            setLocation('/');
-            break;
-        default:
-            break;
+    switch (setting) {
+      case "Profile":
+        setLocation("/Profile");
+        break;
+      case "CreateListings":
+        setLocation("/CreateListings");
+        break;
+      case "Logout":
+        setLocation("/");
+        break;
+      default:
+        break;
     }
-};
+  };
 
-  const menuId = 'primary-search-account-menu';
+  const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: "top",
+        horizontal: "right",
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: "top",
+        horizontal: "right",
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={()=>handleMenuItemClick('Profile')}>Profile</MenuItem>
-      <MenuItem onClick={()=>handleMenuItemClick('CreateListings')}>Create Listings</MenuItem>
-      <MenuItem onClick={()=>handleMenuItemClick('Logout')}>LogOut</MenuItem>
+      <MenuItem onClick={() => handleMenuItemClick("Profile")}>
+        Profile
+      </MenuItem>
+      <MenuItem onClick={() => handleMenuItemClick("CreateListings")}>
+        Create Listings
+      </MenuItem>
+      <MenuItem onClick={() => handleMenuItemClick("Logout")}>LogOut</MenuItem>
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: "top",
+        horizontal: "right",
       }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: "top",
+        horizontal: "right",
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit" component={Link} href='/Cart'>
+        <IconButton
+          size="large"
+          aria-label="show 4 new mails"
+          color="inherit"
+          component={Link}
+          href="/Cart"
+        >
           <Badge badgeContent={4} color="error">
             <ShoppingCartIcon />
           </Badge>
@@ -147,6 +156,26 @@ export default function AppBarComponent() {
     </Menu>
   );
 
+  // server instance metadata
+  const [ec2MetaData, setEC2MetaData] = useState(null);
+
+  useEffect(() => {
+    fetch(`${API_URL}/EC2Metadata.php`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setEC2MetaData(data);
+      })
+      .catch((error) => console.error("Error fetching ec2 metadata:", error));
+  }, []);
+
+  var server_number = "";
+  if (ec2MetaData) { // not null
+    server_number = `(Server Instance: ${ec2MetaData.instance_id})`;
+  }
+  const website_title =
+    "SOFASOGOOD " + server_number;
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
@@ -164,22 +193,28 @@ export default function AppBarComponent() {
             variant="h6"
             noWrap
             component="a"
-            href='/Catalogue'
+            href="/Catalogue"
             sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
           >
-            SOFASOGOOD
+            {website_title}
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit" component={Link} href='/Cart'>
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <IconButton
+              size="large"
+              aria-label="show 4 new mails"
+              color="inherit"
+              component={Link}
+              href="/Cart"
+            >
               <Badge badgeContent={4} color="error">
                 <ShoppingCartIcon />
               </Badge>
@@ -196,7 +231,7 @@ export default function AppBarComponent() {
               <AccountCircle />
             </IconButton>
           </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="show more"
