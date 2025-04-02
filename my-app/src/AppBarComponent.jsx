@@ -1,6 +1,6 @@
 /*!************************************************************************
  * \file AppBarComponent.jsx
-* \author	 Kenzie Lim  | kenzie.l\@digipen.edu
+ * \author	 Kenzie Lim  | kenzie.l\@digipen.edu
  * \par Course: CSD3156
  * \date 25/03/2025
  * \brief
@@ -8,50 +8,48 @@
  *
  * Copyright 2025 DigiPen Institute of Technology Singapore All Rights Reserved
  **************************************************************************/
-import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import {Box,
-    AppBar, 
-    Button,
-    Toolbar,
-    IconButton,
-    Typography,
-    Menu,
-    Container,
-    Avatar,
-    Tooltip,
-    MenuItem,
-    InputBase,
-    Badge
-} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert';
-import {useLocation,
-    useRouter,
-    Link
-} from 'wouter'
+import * as React from "react";
+import { styled, alpha } from "@mui/material/styles";
+import {
+  Box,
+  AppBar,
+  Button,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Avatar,
+  Tooltip,
+  MenuItem,
+  InputBase,
+  Badge,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import MoreIcon from "@mui/icons-material/MoreVert";
+import { useLocation, useRouter, Link } from "wouter";
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
+  "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
-    width: 'auto',
+    width: "auto",
   },
 }));
 
-export default function AppBarComponent() {
+export default function AppBarComponent({ id }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const router = useRouter(); // router hook
@@ -59,7 +57,6 @@ export default function AppBarComponent() {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  const id = sessionStorage.getItem('persistedId');
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -78,68 +75,78 @@ export default function AppBarComponent() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const handleMenuItemClick = (setting) =>{
+  const handleMenuItemClick = (setting) => {
     handleMenuClose();
-    switch(setting) {
-        case 'Profile':
-            setLocation(`/Profile/${id}`);
-            break;
-        case 'CreateListings':
-            setLocation(`/CreateListings/${id}`);
-            break;
-        case 'Logout':
-            sessionStorage.setItem('persistedId', 0);
-            setLocation('/');
-            break;
-        default:
-            break;
+    switch (setting) {
+      case "Profile":
+        setLocation(`/Profile/${id}/${id}`);
+        break;
+      case "CreateListings":
+        setLocation(`/CreateListings/${id}`);
+        break;
+      case "Logout":
+        sessionStorage.setItem("persistedId", 0);
+        setLocation("/");
+        break;
+      default:
+        break;
     }
-};
+  };
 
-  const menuId = 'primary-search-account-menu';
+  const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: "top",
+        horizontal: "right",
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: "top",
+        horizontal: "right",
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={()=>handleMenuItemClick('Profile')}>Profile</MenuItem>
-      <MenuItem onClick={()=>handleMenuItemClick('CreateListings')}>Create Listings</MenuItem>
-      <MenuItem onClick={()=>handleMenuItemClick('Logout')}>LogOut</MenuItem>
+      <MenuItem onClick={() => handleMenuItemClick("Profile")}>
+        Profile
+      </MenuItem>
+      <MenuItem onClick={() => handleMenuItemClick("CreateListings")}>
+        Create Listings
+      </MenuItem>
+      <MenuItem onClick={() => handleMenuItemClick("Logout")}>LogOut</MenuItem>
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: "top",
+        horizontal: "right",
       }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: "top",
+        horizontal: "right",
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit" component={Link} href={`/Cart/${id}`}>
+        <IconButton
+          size="large"
+          aria-label="show 4 new mails"
+          color="inherit"
+          component={Link}
+          href={`/Cart/${id}`}
+        >
           {/* <Badge badgeContent={4} color="error"> */}
-            <ShoppingCartIcon />
+          <ShoppingCartIcon />
           {/* </Badge> */}
         </IconButton>
         <p>Cart</p>
@@ -178,22 +185,28 @@ export default function AppBarComponent() {
             component="a"
             href={`/Catalogue/${id}`}
             sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
           >
             SOFASOGOOD
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit" component={Link} href={`/Cart/${id}`}>
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <IconButton
+              size="large"
+              aria-label="show 4 new mails"
+              color="inherit"
+              component={Link}
+              href={`/Cart/${id}`}
+            >
               {/* <Badge badgeContent={4} color="error"> */}
-                <ShoppingCartIcon />
+              <ShoppingCartIcon />
               {/* </Badge> */}
             </IconButton>
             <IconButton
@@ -208,7 +221,7 @@ export default function AppBarComponent() {
               <AccountCircle />
             </IconButton>
           </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="show more"

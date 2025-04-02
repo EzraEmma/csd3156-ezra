@@ -1,11 +1,11 @@
 <?php
 include "dbinfo.inc";
 header("Access-Control-Allow-Origin: * " );
-header("Access-Control-Allow-Methods: GET");
-header("Content-Type: application/json");
+header("Access-Control-Allow-Methods: POST");
+header("Content-Type: application/x-www-form-urlencoded");
 
-$Username = isset($_GET['Username']) ? $_GET['Username'] : null;
-$PW = isset($_GET['PW']) ? $_GET['PW'] : null;
+$Username = $_POST['Username'] ?? null;     // inventoryID
+$PW = $_POST['PW'] ?? null;                 //inventoryName
 
 $connection = mysqli_connect(hostname: DB_SERVER, username: DB_USERNAME, password: DB_PASSWORD);
 if (mysqli_connect_errno()) {

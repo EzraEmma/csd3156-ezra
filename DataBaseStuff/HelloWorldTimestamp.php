@@ -1,6 +1,5 @@
 <?php
-include "dbinfo.inc";
-header("Access-Control-Allow-Origin:" . DB_ACCESS_ALLOW_ORIGIN);
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET");
 header("Content-Type: application/json");
 

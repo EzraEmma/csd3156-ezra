@@ -1,6 +1,6 @@
 /*!************************************************************************
  * \file App.jsx
-* \author	 Kenzie Lim  | kenzie.l\@digipen.edu
+ * \author	 Kenzie Lim  | kenzie.l\@digipen.edu
  * \par Course: CSD3156
  * \date 25/03/2025
  * \brief
@@ -17,7 +17,7 @@ import { CreateListings } from "./CreateListings.jsx";
 import { ViewProduct } from "./ViewProduct.jsx";
 import { Cart } from "./Cart.jsx";
 import { Route, Router } from "wouter";
-import { PHP_URL } from "./AppInclude.jsx";
+//import { PHP_URL } from "./AppInclude.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -34,19 +34,28 @@ function App() {
 
   return (
     <>
-      {/* <div>
-        <h1>Current Timestamp</h1>
-        <p>{timestamp}</p>
-      </div> */}
       <Router>
-        {/* <HomeButton />  */}
-        <Route path="/" component={Login} />
-        <Route path="/Catalogue/:id" component={Catalogue} />
-        <Route path="/CreateAccount" component={CreateAccount} />
-        <Route path="/Profile/:id" component={Profile} />
-        <Route path="/CreateListings/:id" component={CreateListings} />
-        <Route path="/ViewProduct" component={ViewProduct} />
-        <Route path="/Cart/:id" component={Cart} />
+        <Route path="/">
+          {() => <Login />}
+        </Route>
+        <Route path="/Catalogue/:id">
+          {(params) => <Catalogue id={params.id} />}
+        </Route>
+        <Route path="/CreateAccount">
+          {() => <CreateAccount />}
+        </Route>
+        <Route path="/Profile/:userID/:displayID">
+          {(params) => <Profile userID={params.userID} displayID={params.displayID} />}
+        </Route>
+        <Route path="/CreateListings/:id">
+          {(params) => <CreateListings id={params.id} />}
+        </Route>
+        <Route path="/ViewProduct/:id">
+          {(params) => <ViewProduct id={params.id} />}
+        </Route>
+        <Route path="/Cart/:id">
+          {(params) => <Cart id={params.id} />}
+        </Route>
       </Router>
     </>
   );

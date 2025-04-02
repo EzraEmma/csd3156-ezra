@@ -12,7 +12,7 @@ if (mysqli_connect_errno()) {
  }
  $database = mysqli_select_db(mysql: $connection, database: DB_DATABASE);
 
- 
+
 function TableExists($tableName, $connection, $dbName) {
     $t = mysqli_real_escape_string($connection, $tableName);
     $d = mysqli_real_escape_string($connection, $dbName);
@@ -28,11 +28,8 @@ function TableExists($tableName, $connection, $dbName) {
 
     $sql = "SELECT
     Account.Username,
-    Account.ProfileImage, 
-    Inventory.InventoryID,
-    Inventory.Image,
-    Inventory.Price
-     FROM Account INNER JOIN Inventory ON Inventory.SellerID = Account.AccountID WHERE  Account.AccountID = ? ";
+    Account.ProfileImage,
+     FROM Account  WHERE  Account.AccountID = ? ";
     $stmt = $connection->prepare($sql);
     $stmt->bind_param("s", $ID);
     $stmt->execute();
@@ -45,9 +42,6 @@ function TableExists($tableName, $connection, $dbName) {
 
                     "Name" => $query_data[0],
                     "PFP" => $query_data[1],
-                    "InventoryID" => $query_data[2],
-                    "InventoryImage" => $query_data[3],
-                    "Inventoryprice" => $query_data[4]
         ];
         $response[] = $data;
 

@@ -24,35 +24,36 @@ function TableExists($tableName, $connection, $dbName) {
 
     return false;
  }
- if(TableExists("Orders",$connection,DB_DATABASE)){
+ if(TableExists("Account",$connection,DB_DATABASE)){
 
     $sql = "SELECT
-    Orders.CustomerID,
-    Orders.SellerID,
-    Orders.InventoryID,
-    Orders.Quantity,
-    Orders.OrderConfirmed,
-    Inventory.Name,
+    Account.Username,
+    Account.ProfileImage,
+    Inventory.InventoryID,
+    Inventory.Image,
     Inventory.Price,
-    Inventory.Image
-    From Orders INNER JOIN Inventory ON Inventory.InventoryID = Orders.InventoryID WHERE Orders.CustomerID = ? AND Orders.OrderConfirmed = 0";
-
+    Inventory.Name,
+    Inventory.NumberInStock,
+    Inventory.Description
+     FROM Account INNER JOIN Inventory ON Inventory.SellerID = Account.AccountID WHERE  Account.AccountID = ? ";
     $stmt = $connection->prepare($sql);
-
-    mysqli_stmt_bind_param($stmt, 'i', $ID);
+    $stmt->bind_param("s", $ID);
     $stmt->execute();
     $result = $stmt->get_result();
-    $response=[];
+
+    $response = [];
+
     while($query_data = mysqli_fetch_row($result)) {
         $data = [
-                    "CustomerID" => $query_data[0],
-                    "SellerID" => $query_data[1],
+
+                    "Name" => $query_data[0],
+                    "PFP" => $query_data[1],
                     "InventoryID" => $query_data[2],
-                    "Quantity" => $query_data[3],
-                    "OrderConfirmed" =>$query_data[4],
+                    "InventoryImage" => $query_data[3],
+                    "Inventoryprice" => $query_data[4],
                     "InventoryName" => $query_data[5],
-                    "InventoryPrice" => $query_data[6],
-                    "InventoryImage" => $query_data[7]
+                    "InventoryNumberInStock" => $query_data[6],
+                    "InventoryDescription" => $query_data[7]
         ];
         $response[] = $data;
 

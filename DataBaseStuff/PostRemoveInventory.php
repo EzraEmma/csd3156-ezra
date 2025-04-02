@@ -1,33 +1,31 @@
 <?php
+/**
+ * @file    PostRemoveInventory.php
+ * @author  Emma Natalie Soh
+ * @par     Email: 2202191\@sit.singaporetech.edu.sg
+ * @par     Course: CSD3156 Mobile and Cloud Computing
+ * @par     Project: Cloud Computing Project
+ *
+ * @brief   This file defines a way to drop a entry in the inventory table.
+ */
+
 include "dbinfo.inc";
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Content-Type: application/x-www-form-urlencoded");
 
-// Preflight check: respond early to OPTIONS
-//if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-//   http_response_code(200); // Send HTTP OK
-//   exit(); // Stop further execution
-//}
+// inventory ID
+// seller ID
 
-// For POST/GET: respond with 200 if needed
-//if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET') {
-//   http_response_code(200); // This is optional — most servers default to 200 if not error
-//}
+$ID = $_POST['InventoryID'] ?? null;           //inventory id
+//$Name = $_POST['SellerID'] ?? null;            //seller id
 
-$ID = $_POST['ID'] ?? null;                   //seller id
-$Name = $_POST['Name'] ?? null;               //inventoryName
-$Desc = $_POST['Desc'] ?? null;               //Description
-$Quant = $_POST['Quant'] ?? null;              //Quantity
-$Price = $_POST['Price'] ?? null;              //Price
-$ImagePath = $_POST['ImagePath'] ?? null;      //ImagePath
-
+// connect to the database
 $connection = mysqli_connect(hostname: DB_SERVER, username: DB_USERNAME, password: DB_PASSWORD);
 if (mysqli_connect_errno()) {
    echo "Failed to connect to MySQL: " . mysqli_onnecterror();
 }
 $database = mysqli_select_db(mysql: $connection, database: DB_DATABASE);
-
 
 function TableExists($tableName, $connection, $dbName)
 {
@@ -45,31 +43,14 @@ function TableExists($tableName, $connection, $dbName)
 }
 
 // Prepare the SQL query using placeholders
-$query = "INSERT INTO Inventory (`Name`, `Description`, Price, `Image`, NumberInStock, SellerID, NumberSold)
-      VALUES ( ?, ?, ?, ?, ?, ?, ?)";
+$query = "DELETE FROM Inventory WHERE InventoryID=?";
 
-$_name = $Name;
-$_description = $Desc;
-$_price = $Price;
-$_imagePath = $ImagePath;
-$_numberInStock = $Quant;
-$_sellerID = $ID;
-$_numberSold = 0;
-
+$_inventoryID = $ID;
 
 if ($stmt = mysqli_prepare($connection, $query)) {
+
    // Bind the parameters to the placeholders
-   mysqli_stmt_bind_param(
-      $stmt,
-      'ssisiii',
-      $_name,
-      $_description,
-      $_price,
-      $_imagePath,
-      $_numberInStock,
-      $_sellerID,
-      $_numberSold
-   );
+   mysqli_stmt_bind_param($stmt, 'i', $_inventoryID);
 
    if (mysqli_stmt_execute($stmt)) {
       echo json_encode([

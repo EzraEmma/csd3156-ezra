@@ -1,4 +1,4 @@
-<!-- 
+<!--
  * @file    RefreshDatabase.php
  * @author  Goh Jun Lin Wayne
  * @par     Email: 2200628\@sit.singaporetech.edu.sg
@@ -290,8 +290,8 @@
 /**
  * Verifies if the required tables exist and creates them if they do not.
  *
- * This function checks the existence of three essential tables (`Account`, `Inventory`, 
- * and `Orders`) in the database. If any of these tables do not exist, the function 
+ * This function checks the existence of three essential tables (`Account`, `Inventory`,
+ * and `Orders`) in the database. If any of these tables do not exist, the function
  * triggers the creation of the missing tables using the respective creation functions.
  * It also sets the global MySQL variable `max_allowed_packet` to 64MB to handle larger queries.
  *
@@ -321,8 +321,8 @@ function VerifyTables($connection, $dbName)
 /**
  * Checks if a table exists in the specified database.
  *
- * This function queries the `information_schema` to check if a given table exists 
- * in the provided database. It uses `SELECT` to check for the table's existence 
+ * This function queries the `information_schema` to check if a given table exists
+ * in the provided database. It uses `SELECT` to check for the table's existence
  * and returns a boolean value based on the result.
  *
  * @param string $tableName The name of the table to check.
@@ -354,7 +354,7 @@ function TableExists($tableName, $connection, $dbName)
  * - `ProfileImage`: Stores the profile image as a VARCHAR.
  * - `Username`: A `VARCHAR(20)` field for the username.
  * - `Password`: A `VARCHAR(20)` field for the user's password.
- * 
+ *
  * If the table creation fails, an error message is displayed.
  *
  * @param mysqli $_connection The database connection object.
@@ -459,16 +459,16 @@ function CreateOrdersTable($connection)
 /**
  * Drops specified tables from the database.
  *
- * This function removes the tables `Orders`, `Inventory`, and `Account` from the database, 
- * if they exist. It uses the `DROP TABLE IF EXISTS` SQL command to ensure that no error 
- * occurs if the tables do not exist. This function is useful for database resets or 
+ * This function removes the tables `Orders`, `Inventory`, and `Account` from the database,
+ * if they exist. It uses the `DROP TABLE IF EXISTS` SQL command to ensure that no error
+ * occurs if the tables do not exist. This function is useful for database resets or
  * cleaning up the schema.
  *
  * @param mysqli $_connection The database connection object.
- * @param string $dbName The name of the database (not directly used in the function 
+ * @param string $dbName The name of the database (not directly used in the function
  *                       but included for future flexibility or modifications).
  *
- * @return void This function does not return any value. It performs the operation 
+ * @return void This function does not return any value. It performs the operation
  *              to drop the specified tables.
  */
 function DropTables($connection, $dbName): void
@@ -480,11 +480,11 @@ function DropTables($connection, $dbName): void
 /**
  * Loads sample account and inventory data into the database.
  *
- * This function populates the database with initial data by creating user accounts 
- * and adding inventory items, specifically sofas. It also creates orders for various 
+ * This function populates the database with initial data by creating user accounts
+ * and adding inventory items, specifically sofas. It also creates orders for various
  * inventory items and associates them with customers and sellers.
  * The data is loaded using predefined profile images and inventory descriptions.
- * 
+ *
  * The function performs the following tasks:
  * 1. Loads sample account data with images and user information.
  * 2. Loads sofa inventory data, including names, descriptions, prices, stock, and images.
@@ -492,20 +492,20 @@ function DropTables($connection, $dbName): void
  *
  * @param mysqli $_connection The database connection object.
  * @param string $dbName The name of the database being used (not utilized in the function but included as a parameter).
- * 
+ *
  * @return void This function does not return any value. It performs multiple insert operations to populate the database.
  */
 function LoadData($connection, $dbName): void
 {
 
    $profileImagelinks = array(
-      "https://media.discordapp.net/attachments/1205364935429857351/1357978791783301242/profile00.jpg?ex=67f22bcd&is=67f0da4d&hm=51892a5afad7190e7ac58c0c771ad025e350ba3d71482e80a55ca42b7f975198&",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357978792051871905/profile01.jpg?ex=67f22bce&is=67f0da4e&hm=97566385ddaff854dc316a48d6a89ba0e71f02d50c95863b86a5b74559740546&",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357978792420835421/profile02.jpg?ex=67f22bce&is=67f0da4e&hm=97af7fb2ae6a9d511a2fd79f48d217efb4c22305b04a9fdb79f90335c53b4349&",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357978789606588436/profile03.jpg?ex=67f22bcd&is=67f0da4d&hm=6b2a820b0e562ad6e20cfaeccd88d77fa5cb54442f4bb03a98fab649dca514a4&",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357978790025891940/profile04.jpg?ex=67f22bcd&is=67f0da4d&hm=fb919f4edef2bd8deef12fafff4abd5214c23bb35ec948b361cc62577a47af49&",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357978790579666985/profile05.jpg?ex=67f22bcd&is=67f0da4d&hm=4fdeb8590096fb3b8d88627825e91268d816eafe52613995a7b8c0afe5b00fc8&",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357978791200296992/profile06.jpg?ex=67f22bcd&is=67f0da4d&hm=d3ac7c3c4bc68c63a5af5b45a9da2bed3b2bb6d4f6012c6729096dd974434ce6&"
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/profile/profile00.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/profile/profile01.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/profile/profile02.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/profile/profile03.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/profile/profile04.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/profile/profile05.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/profile/profile06.jpg"
    );
 
    LoadAccount($connection, $profileImagelinks[0], "Emma Natalie Soh", "password");
@@ -522,36 +522,36 @@ function LoadData($connection, $dbName): void
    $additionalFormatting = "0";
 
    $sofaImageLink = array(
-      "https://media.discordapp.net/attachments/1205364935429857351/1357979857509683330/sofa00.jpg?ex=67f22ccc&is=67f0db4c&hm=1d8ed81220a8013b9eaa33c0d8f3945afb314f299f6405fb51666e5a090664e0&=&format=webp&width=1166&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357979859384795247/sofa01.jpg?ex=67f22ccc&is=67f0db4c&hm=673b21cf6b98dc07c674b572b699d8481de5e90b68014333e1d806139376cb2d&=&format=webp&width=1167&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357979860580176055/sofa02.jpg?ex=67f22ccc&is=67f0db4c&hm=f0b9c99cf0782706e163a0d434b86696b1534cbce4640695fc7870fa3cbca124&=&format=webp&width=623&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357979862203371540/sofa03.jpg?ex=67f22ccd&is=67f0db4d&hm=e046834343993d22b2f607c6a04af4d4adff53c1dfa1d47799528fdac13a3acf&=&format=webp&width=518&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357979863914512455/sofa04.jpg?ex=67f22ccd&is=67f0db4d&hm=32cf5a2d20a9cd72af0735bde81d14f0c22d6efd12e8efe3ad34414ac7db128c&=&format=webp&width=1082&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357980133847339018/sofa05.jpg?ex=67f22d0d&is=67f0db8d&hm=05050d4f67a9d7b82cb502ca094807051661cd2e2b62a6f5b4381270d5afbb80&=&format=webp&width=1174&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357980135801884702/sofa06.jpg?ex=67f22d0e&is=67f0db8e&hm=6be399e3e42042ae678022bef99bfafe5f209017d3186895e5d3eadff79b55ed&=&format=webp&width=1167&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357980136930017440/sofa07.jpg?ex=67f22d0e&is=67f0db8e&hm=33c26af6702acad057c3565ff70236083227edaf5e43d47a33760ae4ef8435d3&=&format=webp&width=1167&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357980137605304521/sofa08.jpg?ex=67f22d0e&is=67f0db8e&hm=2c7cdadcc272c8ff7b4ed8b1d1ec4564b089f0dd80f6b97ed0e1165232396506&=&format=webp&width=1383&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357980138842886205/sofa09.jpg?ex=67f22d0f&is=67f0db8f&hm=03298aa95842953d2c8ff856668c0f8dcf02499a93254e62c089c635986f332e&=&format=webp&width=1167&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357980132379197560/sofa10.jpg?ex=67f22d0d&is=67f0db8d&hm=6d6a570525444d7fd763d128cd51e4afb390b5a0b30d7bad46d0112d2ba91f45&=&format=webp&width=518&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357980630826094863/sofa11.jpg?ex=67f22d84&is=67f0dc04&hm=ea29deb506027079bb0e49c08777f1bfd7cf12adb1b131225f2b128bf384fc8b&=&format=webp&width=1018&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357980632180850708/sofa12.jpg?ex=67f22d84&is=67f0dc04&hm=8bc772d831a49a4641348779413d6cbea0df82932d1b54e31070f8d307eceb7b&=&format=webp&width=1167&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357980633829216357/sofa13.jpg?ex=67f22d85&is=67f0dc05&hm=6e67dfd99b056923cc9cb2b0e1296f2ffb143afdea7843feeddfb5dc008ca3ae&=&format=webp&width=1167&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357980635393687673/sofa14.jpg?ex=67f22d85&is=67f0dc05&hm=3cb9746b33b515be8b2dc0db3689ef3c06a078ba7ddb206629b73d1a076548b9&=&format=webp&width=1038&height=778",
-      "https://cdn.discordapp.com/attachments/1205364935429857351/1357980636215775332/sofa15.jpg?ex=67f22d85&is=67f0dc05&hm=935f9343f7a5c377be4ec800e982c1af9267c313e12f0cf65478c817f97a390f&=&format=webp&width=1383&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357980882807427103/sofa16.jpg?ex=67f22dc0&is=67f0dc40&hm=323650b596068442b72cac84db768d01269ec5a40bfd3382a9ceb954a34304ff&=&format=webp&width=1038&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357980884069908550/sofa17.jpg?ex=67f22dc0&is=67f0dc40&hm=6b8721900f9ec89356e4eb205a3d4cf8015e2830ce2ad570548a1310987792ed&=&format=webp&width=1163&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357980886443753563/sofa18.jpg?ex=67f22dc1&is=67f0dc41&hm=2ee50d93b09e031154f1dd5fe8345d0326ae8222229fdcec394130b477c24a03&=&format=webp&width=1167&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357980881641406484/sofa19.jpg?ex=67f22dc0&is=67f0dc40&hm=4f6a4201d0eb1057ac35a44dca1ab066965a799559e91412af742216da51d56d&=&format=webp&width=518&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357981250857734154/sofa20.jpg?ex=67f22e18&is=67f0dc98&hm=041d88d8f2f805d4fd54cb3bf488e19da523ca382f25bdfbb63b930606f343ac&=&format=webp&width=1172&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357981251973415064/sofa21.jpg?ex=67f22e18&is=67f0dc98&hm=ca486394c207d9214a7b9f4a6eefe6f656054ca4009f77fe87018f60f126564c&=&format=webp&width=1038&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357981252690509876/sofa22.jpg?ex=67f22e18&is=67f0dc98&hm=0da266513656f500a48c96dbd1b25dd0179271110cea3509d483ef189cb98673&=&format=webp&width=778&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357981254074630194/sofa23.jpg?ex=67f22e19&is=67f0dc99&hm=1b6c31161e203ebe86dd74702bba49879f1fd4b26af4d582e5efa03b395c2dff&=&format=webp&width=1167&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357981254892523541/sofa24.jpg?ex=67f22e19&is=67f0dc99&hm=20994bde08cbbac1c9d826463a8b3be1b5581742604ca13529c574b7122a25e2&=&format=webp&width=623&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357981256482291783/sofa25.jpg?ex=67f22e19&is=67f0dc99&hm=e2447b0fbbdc53878350a127a93893a47c2d1a206dd11a3d4c2e081bcb897c74&=&format=webp&width=1063&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357981258126196898/sofa26.jpg?ex=67f22e1a&is=67f0dc9a&hm=669650108ded2e54d5c5d37ead8662a716389a3fcc603471a626fca33539f910&=&format=webp&width=778&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357981259271508128/sofa27.jpg?ex=67f22e1a&is=67f0dc9a&hm=0eaf77201b05061e4e4933a332f360bc3f7014024c28094f52aee82673b3c9d4&=&format=webp&width=1085&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357981261204947075/sofa28.jpg?ex=67f22e1a&is=67f0dc9a&hm=ffe4e616385125c4f0efc47b0deb722f21ad8d35a4e8b68502e770dba5b25fcf&=&format=webp&width=1167&height=778",
-      "https://media.discordapp.net/attachments/1205364935429857351/1357981249993441361/sofa29.jpg?ex=67f22e18&is=67f0dc98&hm=3f41e8c99db45bd37d9ad4ba377530a6ddc208eaea2fc92defd0e2336e61a156&=&format=webp&width=583&height=778"
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa00.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa01.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa02.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa03.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa04.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa05.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa06.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa07.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa08.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa09.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa10.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa11.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa12.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa13.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa14.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa15.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa16.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa17.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa18.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa19.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa20.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa21.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa22.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa23.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa24.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa25.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa26.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa27.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa28.jpg",
+      "https://raw.githubusercontent.com/EzraEmma/csd3156-ezra/refs/heads/dev/DataBaseStuff/sofa/sofa29.jpg"
    );
 
    $sofaDesc = array(
@@ -660,7 +660,7 @@ function testConfirm($connection, $dbName) : void{
  * @param string $_profileImagePath The file path to the user's profile image.
  * @param string $_userName The username for the account.
  * @param string $_password The password associated with the account.
- * 
+ *
  * @return void This function does not return any value.
  */
 function LoadAccount($connection, $_profileImagePath, $_userName, $_password): void
@@ -686,9 +686,9 @@ function LoadAccount($connection, $_profileImagePath, $_userName, $_password): v
 /**
  * Loads inventory data into the database.
  *
- * This function takes in inventory item details such as name, description, price, image path, 
- * number in stock, number sold, and seller ID. It checks if the image exists and, if so, stores 
- * the image in the database along with the rest of the inventory information. If no image is provided, 
+ * This function takes in inventory item details such as name, description, price, image path,
+ * number in stock, number sold, and seller ID. It checks if the image exists and, if so, stores
+ * the image in the database along with the rest of the inventory information. If no image is provided,
  * it inserts the inventory data without an image.
  *
  * @param mysqli $_connection The database connection object.
@@ -699,14 +699,14 @@ function LoadAccount($connection, $_profileImagePath, $_userName, $_password): v
  * @param int $_numberInStock The number of items in stock.
  * @param int $_numberSold The number of items sold.
  * @param int $_sellerID The ID of the seller associated with the inventory item.
- * 
+ *
  * @return void This function does not return any value. It directly inserts data into the database.
  */
 function LoadInventory($_connection, $_name, $_description, $_price, $_imagePath, $_numberInStock, $_numberSold, $_sellerID)
 {
 
    // Prepare the SQL query using placeholders
-   $query = "INSERT INTO Inventory (`Name`, `Description`, Price, `Image`, NumberInStock, SellerID, NumberSold) 
+   $query = "INSERT INTO Inventory (`Name`, `Description`, Price, `Image`, NumberInStock, SellerID, NumberSold)
       VALUES ( ?, ?, ?, ?, ?, ?, ?)";
 
    if ($stmt = mysqli_prepare($_connection, $query)) {
@@ -728,8 +728,8 @@ function LoadInventory($_connection, $_name, $_description, $_price, $_imagePath
 /**
  * Inserts a new order into the Orders table.
  *
- * This function takes in details about a customer's order, including customer ID, seller ID, 
- * inventory ID, quantity, order group ID, and timestamp, then inserts this information into 
+ * This function takes in details about a customer's order, including customer ID, seller ID,
+ * inventory ID, quantity, order group ID, and timestamp, then inserts this information into
  * the Orders table in the database.
  *
  * @param mysqli $_connection The database connection object.
@@ -740,12 +740,12 @@ function LoadInventory($_connection, $_name, $_description, $_price, $_imagePath
  * @param int $_orderGroupID The group ID to associate orders within a group.
  * @param bool $_orderConfirmed The boolean if the order is confirmed
  * @param string $_timeStamp The timestamp when the order was placed.
- * 
+ *
  * @return void This function does not return any value. It performs an insert operation.
  */
 function LoadOrders($_connection, $_customerID, $_sellerID, $_inventoryID, $_quantity, $_orderGroupID, $_timeStamp, $_orderConfirmed)
 {
-   $query = "INSERT INTO Orders ( `CustomerID`, `SellerID`, InventoryID, `Quantity`,OrderGroupID ,`Timestamp`,`OrderConfirmed`) 
+   $query = "INSERT INTO Orders ( `CustomerID`, `SellerID`, InventoryID, `Quantity`,OrderGroupID ,`Timestamp`,`OrderConfirmed`)
       VALUES ( ?, ?, ?, ?, ?,?,?)";
 
    if ($stmt = mysqli_prepare($_connection, $query)) {
@@ -766,14 +766,14 @@ function LoadOrders($_connection, $_customerID, $_sellerID, $_inventoryID, $_qua
 /**
  * Checks if the required quantity of an item is available in stock.
  *
- * This function queries the Inventory table to retrieve the current stock quantity 
+ * This function queries the Inventory table to retrieve the current stock quantity
  * for a specific inventory item and compares it with the requested quantity.
  * It returns true if enough stock is available, otherwise false.
  *
  * @param mysqli $_connection The database connection object.
  * @param int $_inventoryID The ID of the inventory item to check stock for.
  * @param int $_quantity The quantity requested by the customer.
- * 
+ *
  * @return bool Returns true if the requested quantity is available, false otherwise.
  */
 function CheckStock($_connection, $_inventoryID, $_quantity)
@@ -802,7 +802,7 @@ function CheckStock($_connection, $_inventoryID, $_quantity)
  * @param mysqli $_connection The database connection object.
  * @param int $_inventoryID The ID of the inventory item being sold.
  * @param int $_quantity The quantity of the item being sold.
- * 
+ *
  * @return void This function does not return any value. It updates the inventory data.
  */
 function SoldInventory($_connection, $_inventoryID, $_quantity): void
@@ -813,13 +813,13 @@ function SoldInventory($_connection, $_inventoryID, $_quantity): void
 /**
  * Updates the stock quantity of an inventory item.
  *
- * This function adjusts the number of items in stock by a specified change amount 
+ * This function adjusts the number of items in stock by a specified change amount
  * (positive or negative) for a given inventory item in the Inventory table.
  *
  * @param mysqli $_connection The database connection object.
  * @param int $_inventoryID The ID of the inventory item to update.
  * @param int $_changeInStock The change in stock quantity (can be positive or negative).
- * 
+ *
  * @return void This function does not return any value. It updates the inventory stock.
  */
 function ChangeStock($_connection, $_inventoryID, $_changeInStock): void
@@ -838,13 +838,13 @@ function ChangeStock($_connection, $_inventoryID, $_changeInStock): void
 /**
  * Updates the number of items sold for a specific inventory item.
  *
- * This function increments the number of items sold in the Inventory table for a 
+ * This function increments the number of items sold in the Inventory table for a
  * given inventory item by a specified quantity.
  *
  * @param mysqli $_connection The database connection object.
  * @param int $_inventoryID The ID of the inventory item to update.
  * @param int $_changeInSold The change in the number of items sold (should be positive).
- * 
+ *
  * @return void This function does not return any value. It updates the sold quantity.
  */
 function ChangeInSold($_connection, $_inventoryID, $_changeInSold): void
@@ -864,8 +864,8 @@ function ChangeInSold($_connection, $_inventoryID, $_changeInSold): void
 /**
  * Adds a new order if there is sufficient stock, and updates inventory.
  *
- * This function first checks if there is enough stock available for the requested item. 
- * If there is enough stock, it loads the order into the database and then updates the 
+ * This function first checks if there is enough stock available for the requested item.
+ * If there is enough stock, it loads the order into the database and then updates the
  * inventory by adjusting the stock and the number of items sold.
  *
  * @param mysqli $_connection The database connection object.
@@ -875,7 +875,7 @@ function ChangeInSold($_connection, $_inventoryID, $_changeInSold): void
  * @param int $_quantity The quantity of the item being ordered.
  * @param int $_orderGroupID The ID of the order group for grouping related orders.
  * @param string $_timeStamp The timestamp of when the order is placed.
- * 
+ *
  * @return void This function does not return any value. It performs order processing and inventory updates.
  */
 function AddOrders($_connection, $_customerID, $_sellerID, $_inventoryID, $_quantity, $_orderGroupID, $_timeStamp)
@@ -891,12 +891,12 @@ function AddOrders($_connection, $_customerID, $_sellerID, $_inventoryID, $_quan
 function ConfirmOrderGroup($_connection ,$_orderGroup)
 {
    $query = "SELECT
-   Inventory.InventoryID, 
+   Inventory.InventoryID,
    Inventory.NumberInStock,
    Orders.Quantity,
    Orders.OrderGroupID,
    Orders.OrderConfirmed
-   FROM Inventory 
+   FROM Inventory
    INNER JOIN Orders ON Orders.InventoryID = Inventory.InventoryID
    WHERE Orders.OrderGroupID = ?";
 

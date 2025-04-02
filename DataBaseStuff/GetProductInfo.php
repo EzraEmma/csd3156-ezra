@@ -1,6 +1,6 @@
 <?php
 include "dbinfo.inc";
-header("Access-Control-Allow-Origin: * " );
+header("Access-Control-Allow-Origin: * ");
 header("Access-Control-Allow-Methods: GET");
 header("Content-Type: application/json");
 
@@ -8,25 +8,28 @@ $ID = isset($_GET['ID']) ? $_GET['ID'] : null;
 
 $connection = mysqli_connect(hostname: DB_SERVER, username: DB_USERNAME, password: DB_PASSWORD);
 if (mysqli_connect_errno()) {
-    echo "Failed to connect to MySQL: " .mysqli_onnecterror();
- }
- $database = mysqli_select_db(mysql: $connection, database: DB_DATABASE);
+    echo "Failed to connect to MySQL: " . mysqli_onnecterror();
+}
+$database = mysqli_select_db(mysql: $connection, database: DB_DATABASE);
 
- 
-function TableExists($tableName, $connection, $dbName) {
+
+function TableExists($tableName, $connection, $dbName)
+{
     $t = mysqli_real_escape_string($connection, $tableName);
     $d = mysqli_real_escape_string($connection, $dbName);
 
-    $checktable = mysqli_query($connection,
-            "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_NAME = '$t' AND TABLE_SCHEMA = '$d'");
+    $checktable = mysqli_query(
+        $connection,
+        "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_NAME = '$t' AND TABLE_SCHEMA = '$d'"
+    );
 
-    if(mysqli_num_rows($checktable) > 0) return true;
+    if (mysqli_num_rows($checktable) > 0) return true;
 
     return false;
- }
- if(TableExists("Inventory",$connection,DB_DATABASE)){
+}
+if (TableExists("Inventory", $connection, DB_DATABASE)) {
 
-    $sql = "SELECT 
+    $sql = "SELECT
     Inventory.InventoryID,
     Inventory.Name,
     Inventory.Description,
@@ -45,7 +48,7 @@ function TableExists($tableName, $connection, $dbName) {
 
     $response = [];
 
-    while($query_data = mysqli_fetch_row($result)) {
+    while ($query_data = mysqli_fetch_row($result)) {
         $data = [
                     "ID" => $query_data[0],
                     "Name" => $query_data[1],
@@ -59,8 +62,6 @@ function TableExists($tableName, $connection, $dbName) {
                     "SellerProfilePicture" => $query_data[9]
         ];
         $response[] = $data;
-
     }
     echo json_encode($response);
- }
-?>
+}

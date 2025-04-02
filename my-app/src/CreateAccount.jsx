@@ -11,13 +11,15 @@
 
 import React, {useState, useEffect} from 'react';
 import {Box,
-    TextField, 
+    TextField,
     Button,
     styled,
     Paper} from '@mui/material';
 import sofaLogo from './assets/sofasogoodicon.png'
 import {Link, useLocation} from 'wouter'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import axios from "axios";
+import { PHP_URL } from './AppInclude';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -57,7 +59,7 @@ const CreateAccount = () => {
     .catch(function (error) {
       console.log(error);
     });
-    
+
 
     setLocation('/');
   }
@@ -65,7 +67,7 @@ const CreateAccount = () => {
   useEffect(() => {
       if (password1 == password2 &&
         password1 != '' &&
-        password2 != '' && 
+        password2 != '' &&
         userName != ''
       ) {
         setPwMatch(true)
@@ -97,67 +99,67 @@ const CreateAccount = () => {
           </div>
 
           {/* <div style={{ display: 'flex', gap: '20px' }}>
-            <TextField 
-              required 
-              id="outlined-basic" 
-              label="First Name" 
+            <TextField
+              required
+              id="outlined-basic"
+              label="First Name"
               variant="outlined"
               value={firstName}
               onChange={(event) => {
                 setFirstName(event.target.value);
               }}
             />
-            <TextField 
-              required 
-              id="outlined-basic" 
-              label="Last Name" 
-              variant="outlined" 
+            <TextField
+              required
+              id="outlined-basic"
+              label="Last Name"
+              variant="outlined"
               onChange={(event) => {
                 setLastName(event.target.value);
               }}
             />
           </div> */}
 
-          <TextField 
-            required 
-            id="outlined-basic" 
-            label="Username" 
-            variant="outlined" 
+          <TextField
+            required
+            id="outlined-basic"
+            label="Username"
+            variant="outlined"
             value={userName}
             onChange={(event) => {
               setUserName(event.target.value);
             }}
           />
-          <TextField  
-            required 
-            id="outlined-basic" 
+          <TextField
+            required
+            id="outlined-basic"
             type='password'
-            label="Password" 
-            variant="outlined" 
+            label="Password"
+            variant="outlined"
             value={password1}
             onChange={(event) => {
               setPassword1(event.target.value);
             }}
           />
-          <TextField  
+          <TextField
             required
-            id="outlined-basic" 
+            id="outlined-basic"
             type='password'
-            label="Confirm Password" 
+            label="Confirm Password"
             variant="outlined"
             value={password2}
             onChange={(event) => {
               setPassword2(event.target.value);
-            }} 
+            }}
           />
-          <TextField  
+          <TextField
             required
-            id="outlined-basic" 
-            label="Image" 
+            id="outlined-basic"
+            label="Image"
             variant="outlined"
             onChange={(event) => {
               setImg(event.target.value);
-            }} 
+            }}
           />
           {img != '' && <img src={img} alt="account logo" />}
           <div>

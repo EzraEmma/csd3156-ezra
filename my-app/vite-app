@@ -1,0 +1,22 @@
+server {
+    listen 80;
+    server_name localhost;
+
+    # directory
+    # reactjs project vite build at this root
+    root /var/www/vite-app/dist;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /index.html {
+        try_files $uri =404;
+        add_header Cache-Control "no-cache, no-store, must-revalidate";
+    }
+
+     # Enable Gzip compression
+    gzip on;
+    gzip_types text/css application/javascript image/svg+xml;
+}
