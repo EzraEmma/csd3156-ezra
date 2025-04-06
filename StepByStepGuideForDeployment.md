@@ -430,9 +430,6 @@ Additional settings, enable group metrics within CloudWatch : Enable
 
 Add notifications
 SNS Topic : Redshift SNS
-
-Tags
-Key, Value: name,
 ```
 
 **Step 2**

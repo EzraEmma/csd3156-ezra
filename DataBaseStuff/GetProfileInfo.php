@@ -28,7 +28,7 @@ function TableExists($tableName, $connection, $dbName) {
 
     $sql = "SELECT
     Account.Username,
-    Account.ProfileImage,
+    Account.ProfileImage
      FROM Account  WHERE  Account.AccountID = ? ";
     $stmt = $connection->prepare($sql);
     $stmt->bind_param("s", $ID);
